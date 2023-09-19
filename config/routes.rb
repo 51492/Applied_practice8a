@@ -10,11 +10,11 @@ Rails.application.routes.draw do
   # get 'books/index'
   # get 'books/show'
   # get 'books/destroy'
-  resources :books, only: [:new, :create, :index, :show]
+  resources :books, only: [:new, :create, :index, :show, :destroy]
 
   # get 'users/show'
   # get 'users/edit'
-  resources :users, only: [:show, :edit]
+  resources :users, only: [:show, :index, :edit, :update]
 
 end
 

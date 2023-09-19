@@ -1,2 +1,40 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<div>
+  <h1>User info</h1>
+  
+  <%= image_tag current_user.get_profile_image(100,100) %>
+  <p>name<%= current_user.name %></p>
+  <p>introduction<%= current_user.introduction %></p>
+  <p><%= link_to "プロフィール編集", edit_user_path(current_user.id) %></p>
+  
+  <h1>New book</h1>
+  <%= form_with model: @book do |f| %>
+  
+  <h4>Title</h4>
+  <%= f.text_field :title %>
+  
+  <h4>Opinion</h4>
+  <%= f.text_area :body %>
+  
+  <%= f.submit 'Create Book' %>
+<% end %>
+
+</div>
+    <!--上はいずれ共通化する-->
+
+
+<h1>Book detail</h1>
+
+<div>
+  <!--＜%= image_tag @book.get_image %>-->
+  <%= link_to user_path(@book.user.id) do %>
+    <p><%= image_tag @book.user.get_profile_image(100,100) %></p>
+    <p><%= @book.user.name %></p>
+  <% end %>
+
+  <p><%= @book.title %></p>
+  <p><%= @book.body %></p>
+  <!--<p>投稿日：＜%= XXX.created_at.strftime('%Y/%m/%d') %></p>-->
+  <% if @book.user == current_user %>
+    <%= link_to "Destroy", book_path(@book), method: :delete %>
+  <% end %>
+</div>
