@@ -1,19 +1,46 @@
-<%= render 'list', book: @book_new, user: @user %> <!--共通レイアウト(同じフォルダの為パス記入欄は「list」のみ-->
+<div class="row">
+
+  <%= render 'list', book: @book_new, user: @user %>
+  <!--共通レイアウト(同じフォルダの為パス記入欄は「list」のみ)-->
 
 
-<h1>Book detail</h1>
+  <div class="col-md-8 offset-md-1">
 
-<div>
-  <!--＜%= image_tag @book.get_image %>-->
-  <%= link_to user_path(@book.user.id) do %>
-    <p><%= image_tag @book.user.get_profile_image(100,100) %></p>
-    <p><%= @book.user.name %></p>
-  <% end %>
+    <h2>Book detail</h2>
 
-  <p><%= link_to @book.title, book_path(@book.id) %></p>
-  <p><%= @book.body %></p>
-  <!--<p>投稿日：＜%= XXX.created_at.strftime('%Y/%m/%d') %></p>-->
-  <% if @book.user == current_user %>
-    <%= link_to "Destroy", book_path(@book), method: :delete %>
-  <% end %>
+    <table class="table">
+      <tbody>
+        <tr>
+
+          <td>
+            <%= link_to user_path(@book.user.id) do %>
+            <%= image_tag @book.user.get_profile_image(100,100) %><br>
+            <%= @book.user.name %>
+            <% end %>
+          </td>
+
+          <td><%= link_to @book.title, book_path(@book.id) %></td>
+
+          <td><%= @book.body %></td>
+
+          <% if @book.user == current_user %>
+          <td>
+            <%= link_to edit_book_path(@book.id), class:"btn btn-success" do %>
+              Edit
+            <% end %>
+          </td>
+
+          <td>
+            <%= link_to edit_book_path(@book.id), method: :delete, class:"btn btn-danger" do %>
+              Destroy
+            <% end %>
+          </td>
+          <% end %>
+
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
 </div>
