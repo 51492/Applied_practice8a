@@ -1,13 +1,19 @@
 class BooksController < ApplicationController
   def new
-    @book = Book.new
+    @book_new = Book.new
   end
 
   def create
-    @book = Book.new(book_params)
-    @book.user_id = current_user.id
-    @book.save
-    redirect_to books_path
+    @book_new = Book.new(book_params)
+    @book_new.user_id = current_user.id
+    if @book_new.save
+      redirect_to book_path(@book_new.id)
+    else
+      # ↓レンダーでindexのviewを表示する前に必要なインスタンスを用意
+      @user = current_user
+      @books = Book.all
+      render :index
+    end
   end
 
   def index

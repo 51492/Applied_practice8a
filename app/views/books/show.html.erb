@@ -10,7 +10,7 @@
     <p><%= @book.user.name %></p>
   <% end %>
 
-  <p><%= @book.title %></p>
+  <p><%= link_to @book.title, book_path(@book.id) %></p>
   <p><%= @book.body %></p>
   <!--<p>投稿日：＜%= XXX.created_at.strftime('%Y/%m/%d') %></p>-->
   <% if @book.user == current_user %>

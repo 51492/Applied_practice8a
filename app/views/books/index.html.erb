@@ -1,3 +1,11 @@
+<% if @book_new.errors.any? %>
+  <%= @book_new.errors.count %> errors prohibited this obj from being saved:
+  <ul>
+    <% @book_new.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= render 'list', book: @book_new, user: @user %> <!--共通レイアウト(同じフォルダの為パス記入欄は「list」のみ-->
 
