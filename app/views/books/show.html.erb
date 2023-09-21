@@ -31,7 +31,7 @@
           </td>
 
           <td>
-            <%= link_to edit_book_path(@book.id), method: :delete, class:"btn btn-danger" do %>
+            <%= link_to book_path(@book.id), method: :delete, class:"btn btn-danger" do %>
               Destroy
             <% end %>
           </td>

@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
 
   root to: "homes#top"
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'devise/sessions',
+    registrations: 'devise/registrations'
+  }  
+  # deviseを使用する際にURLとしてusersを含むことを示している
 
   get "homes/about" => "homes#about", as: "about"
+  # resources :homes, only: [:about, :destroy]
 
   # get 'books/new'
   # get 'books/create'
