@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'devise/sessions',
     registrations: 'devise/registrations'
-  }  
+  }
   # deviseを使用する際にURLとしてusersを含むことを示している
 
-  get "homes/about" => "homes#about", as: "about"
+  get "home/about" => "homes#about", as: "about"
   # resources :homes, only: [:about, :destroy]
 
   # get 'books/new'
