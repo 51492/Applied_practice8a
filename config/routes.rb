@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   # get 'books/index'
   # get 'books/show'
   # get 'books/destroy'
-  resources :books, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+  resources :books, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+    resources :post_comments, only: [:create, :destroy]
+  end
 
   # get 'users/show'
   # get 'users/edit'
