@@ -8,6 +8,12 @@ class User < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
+  has_many :relationships, foreign_key: :followed_id, dependent: :destroy
+  has_many :followeds, through: :relationships, source: :follower
+
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: :follower_id, dependent: :destroy
+  has_many :followers, through: :reverse_of_relationships, source: :followed
+
   has_one_attached :profile_image
 
   validates :name, presence: true, uniqueness: true, length: { in: 2..20 }
@@ -19,6 +25,11 @@ class User < ApplicationRecord
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
+  end
+
+  def followed_by?(user)
+    reverse_of_relationships.exists?(followed_id: user.id)
+    # relationshipsテーブル内に既存かどうかを調べ、存在してればtrue、してなければfalseを返す
   end
 
 end

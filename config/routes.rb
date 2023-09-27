@@ -22,7 +22,11 @@ Rails.application.routes.draw do
 
   # get 'users/show'
   # get 'users/edit'
-  resources :users, only: [:show, :index, :edit, :update]
+  resources :users, only: [:show, :index, :edit, :update] do
+    resource :relationships, only: [:create, :destroy]
+    get :followeds, on: :member
+    get :followers, on: :member
+  end
 
 end
 

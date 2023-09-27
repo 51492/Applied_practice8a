@@ -5,12 +5,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @book_new = Book.new
+    @users_f = User.where.not(id: current_user.id)
   end
 
   def index
     @user = current_user
     @users = User.all
     @book_new = Book.new
+    @users_f = User.where.not(id: current_user.id)
   end
 
   def edit
@@ -26,6 +28,16 @@ class UsersController < ApplicationController
     else
       render :edit
     end
+  end
+  
+  def followeds
+    user = User.find(params[:id])
+    @users = user.followeds
+  end
+  
+  def followers
+    user = User.find(params[:id])
+    @users = user.followers
   end
 
 
