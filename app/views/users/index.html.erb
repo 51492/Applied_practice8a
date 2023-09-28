@@ -13,6 +13,9 @@
           <tr>
             <th>image</th>
             <th>name</th>
+            <th></th>
+            <th></th>
+            <th></th>
             <th colspan="3"></th>
           </tr>
         </thead>
@@ -20,8 +23,19 @@
         <tbody>
           <% @users.each do |user| %>
           <tr>
-            <td><%= image_tag user.get_profile_image(100,100) %></td>
+            <td><%= image_tag user.get_profile_image(50,50) %></td>
             <td><%= user.name %></td>
+            <td>フォロー数: <%= user.followeds.count %></td>
+            <td>フォロワー数: <%= user.followers.count %></td>
+            <td>
+              <% if user != current_user %>
+                <% if user.followed_by?(current_user) %>
+                  <%= link_to "フォロー外す", user_relationships_path(user), method: :delete %>
+                <% else %>
+                  <%= link_to "フォローする", user_relationships_path(user), method: :post %>
+                <% end %>
+              <% end %>
+            </td>
             <td><%= link_to "Show", user_path(user.id) %></td>
           </tr>
           <% end %>
