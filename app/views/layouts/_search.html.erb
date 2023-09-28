@@ -1,0 +1,26 @@
+<% if user_signed_in? %>
+  <div class="col search_form">
+    <%= form_with url: search_path, local: true, method: :get do |f| %>
+
+      <%= f.text_field :word %>
+      <!--検索したテキストをwordカラムとしてアクションに送っている-->
+
+      <%= f.select :range, options_for_select([['User'], ['Book']]) %>
+      <!--複数のモデルから検索できるように実装する為、UserモデルとBookモデルを選択できるようにしている-->
+
+      <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
+      <!--検索手法を定義している。カンマ区切りで複数定義が可能。選択した検索手法をsearchカラムとしてアクションに送っている-->
+
+      <%= f.submit "検索" %>
+    <% end %>
+  </div>
+<% end %>
+
+
+<!--以下参考-->
+
+<!--Rails 検索機能の実装 - Qiitaブログ-->
+  <!--https://qiita.com/hapiblog2020/items/6c2cef49df5616da9ae3-->
+
+<!--【Ruby on Rails】検索機能をGemなしで実装｜簡単なメモアプリにAjaxで検索結果を表示させよう-->
+  <!--https://www.youtube.com/watch?v=z57EKLjf4xM-->

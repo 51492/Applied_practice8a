@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'searches/search'
   root to: "homes#top"
   devise_for :users, controllers: {
     sessions: 'devise/sessions',
@@ -9,6 +10,8 @@ Rails.application.routes.draw do
 
   get "home/about" => "homes#about", as: "about"
   # resources :homes, only: [:about, :destroy]
+  
+  get "search" => "searches#search"
 
   # get 'books/new'
   # get 'books/create'
