@@ -1,0 +1,6 @@
+$('#post-comments').html("<%= j(render "post_comments/comment", book: @book) %>");
+$('#comment_count').html("<%= @book.post_comments.count %>")
+
+<!--以下参考-->
+  <!--Rails 非同期でコメント機能実装-->
+  <!--https://zenn.dev/goldsaya/articles/968b2441342357-->

@@ -27,7 +27,7 @@
             <%= render "favorites/favorite", book: @book %>
           </td>
 
-          <td>コメント数：<%= @book.post_comments.count %></td>
+          <td>コメント数：<span id="comment_count"><%= @book.post_comments.count %></span></td>
 
           <% if @book.user == current_user %>
           <td>
@@ -47,30 +47,29 @@
       </tbody>
     </table>
 
-    <div>
-      <% @book.post_comments.each do |post_comment| %>
-        <div>
-          <%= image_tag post_comment.user.get_profile_image(100,100) %>
-          <%= post_comment.comment %>
-          <% if post_comment.user == current_user %>
-            <%= link_to "Destroy",book_post_comment_path(post_comment.book, post_comment), method: :delete, class:"btn btn-danger" %>
-          <% end %>
-        </div>
-
-        <div><%= link_to post_comment.user.name, user_path(post_comment.user.id) %></div>
-      <% end %>
+    <div id="post-comments">
+      <%= render "post_comments/comment", book: @book %>
     </div>
 
-    <%= form_with model: [@book, @post_comment] do |f| %>
-      <div class="form-group">
-        <%= f.text_area :comment, rows: '5', class: "form-control comment" %>
-      </div>
+    <div id="comment-form">
+      <%= render "post_comments/form", book: @book, post_comment: @post_comment %>
+    </div>
 
-      <div>
-        <%= f.submit "送信" %>
-      </div>
-    <% end %>
+
 
   </div>
 
 </div>
+
+
+<!--以下参考-->
+
+  <!--Rails 非同期でコメント機能実装-->
+    <!--https://zenn.dev/goldsaya/articles/968b2441342357-->
+
+
+<!--聞きたいこと-->
+
+  <!--なぜjqueryの定義(<script src="...)を入てないのに問題なく動作するのか…？-->
+    <!--https://terakoya.sejuku.net/question/detail/16289-->
+    <!--https://qumeru.com/magazine/601-->
