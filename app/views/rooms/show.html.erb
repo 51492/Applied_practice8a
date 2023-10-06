@@ -1,0 +1,9 @@
+<h2><%= @entries.user.name %>さんとのチャット</h2> <!--Entryテーブルのuser_idのレコードを参照し、Usersテーブルのname情報を持ってくる-->
+
+<div class= "chats">
+  <div class= "chat">
+    <% if @messages.present? %> <!--過去のメッセージが存在するかどうかを確認、あればtrue、無ければfalseが戻り値になる -->
+      <% @messages.each do |m| %>
+      過去のメッセージをeachで
+  </div>
+</div>
