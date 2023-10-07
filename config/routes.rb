@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   get "home/about" => "homes#about", as: "about"
   # resources :homes, only: [:about, :destroy]
-  
+
   get "search" => "searches#search"
 
   # get 'books/new'
@@ -30,9 +30,9 @@ Rails.application.routes.draw do
     get :followeds, on: :member
     get :followers, on: :member
   end
-  
+
   # DM機能のためのルーティング
-  resources :users, only: [:show, :edit, :update]
+  # resources :users, only: [:show, :edit, :update] 上で書いてるから不要？
   resources :messages, only: [:create]
   resources :rooms, only: [:create, :show]
 

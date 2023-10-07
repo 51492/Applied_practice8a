@@ -1,9 +1,32 @@
-<h2><%= @entries.user.name %>さんとのチャット</h2> <!--Entryテーブルのuser_idのレコードを参照し、Usersテーブルのname情報を持ってくる-->
+<!--<h2>%= @entries.user.name %>さんとのチャット</h2> <!--Entryテーブルのuser_idのレコードを参照し、Usersテーブルのname情報を持ってくる-->
+
+<% @entries.each do |e| %> <!--何故eachを使って要素を振り分ける必要があるのか？直接@entries.user.nameを使って表示しようとするとNoMethodになる理由が不明-->
+  <% unless e.user == current_user %>
+    <h2><%= e.user.name %>さんとのチャットルーム</h2>
+  <% end %>
+<% end %>
 
 <div class= "chats">
   <div class= "chat">
     <% if @messages.present? %> <!--過去のメッセージが存在するかどうかを確認、あればtrue、無ければfalseが戻り値になる -->
-      <% @messages.each do |m| %>
-      過去のメッセージをeachで
+      <% @messages.each do |m| %> <!--ハッシュとして格納された過去のメッセージ(要素)をeachで順に取り出し、引数mに格納-->
+        <% current_user.id == m.user.id %><!--何がしたい？-->
+        <p><%= m.user.name %></p>
+        <p><%= m.message %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class= "posts">
+    <%= form_with model: @message do |f| %> <!--コントローラの.newメソッドで用意した空のテーブルに入力するためにform_withを使う-->
+      <%= f.text_field :content, placeholder: "メッセージを入力して下さい", size: 50, class:"form-text-field" %>
+      <%= f.hidden_field :room_id, value: @room.id %> <!--hidden_fieldメソッドを用いて入力フォームとして用意されていないroom_idカラムに自動で要素を入れる-->
+      <%= f.submit "投稿", class: "form-submit" %>
+    <% end %>
   </div>
 </div>
+
+<!--以下参考-->
+
+  <!--Rails DM機能の実装-->
+    <!--https://zenn.dev/goldsaya/articles/71758cf3024dc1-->

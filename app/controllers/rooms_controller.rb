@@ -11,7 +11,7 @@ class RoomsController < ApplicationController
   def show
     @room = Room.find(params[:id]) #既存のルームをfindで探してインスタンス変数に格納
     if Entry.where(user_id: current_user.id, room_id: @room.id).present? #Entryテーブル内にuser_idがcurrent_userのidで、current_userと相手間のroom_idが取得されたものが存在しますか？
-      @messages = @room.messages #アソシエーションで設定したMessagesテーブルのデータをインスタンス変数に格納
+      @messages = @room.messages #アソシエーションで設定したMessagesテーブルのデータをハッシュとしてインスタンス変数に格納
       @message = Message.new #新しいmessageを作成するための空のモデルを用意してインスタンス変数に格納
       @entries = @room.entries #アソシエーションで設定したEntriesテーブルのデータをインスタンス変数に格納
     else #ルームが存在しない場合
@@ -26,4 +26,5 @@ end
   # RailsでややこしいDM機能を1万字でくわしく解説してみた
     # https://qiita.com/bindingpry/items/6790c91f374acc25bea2#users_controller
   
-  
+  # Rails DM機能の実装
+    # https://zenn.dev/goldsaya/articles/71758cf3024dc1

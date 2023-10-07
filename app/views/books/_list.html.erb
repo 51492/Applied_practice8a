@@ -41,13 +41,16 @@
         <% end %>
       <% end %>
     </div>
-    
+
     <!--DM機能---------------------------------------------------------------->
     <div class="col-6">
       <% unless user.id == current_user.id %>
+
         <% if (current_user.followed_by? user) && (user.followed_by? current_user) %> <!--「相互フォロー状態のとき」の条件を付与-->
+
           <% if is_room == true %> <!--コントローラーで定義した「既存のルームがあるとき」の条件を付与-->
-            <p class="user-show-room"><%= link_to "chatへ", "/rooms/<%= room_id %>" %></p> <!--「chatへ」を表示し、クリックすると相手とのチャットルームに遷移する-->
+            <p class="user-show-room"><%= link_to "chatへ", room_path(room_id) %></p> <!--「chatへ」を表示し、クリックすると相手とのチャットルームに遷移する-->
+
           <% else %> <!--「既存のルームが無い場合」-->
             <%= form_with model: room do |f| %> <!--newメソッドを格納したインスタンス変数にフォームで値を格納しパラメータとしてコントローラに送る-->
               <%= fields_for entry do |e| %> <!--子モデルのEntriesテーブルにも保存するため、fields_forを使いアソシエーション設定しているEntryモデルを対象とする-->
@@ -56,9 +59,10 @@
               <%= f.submit "chatを始める" %>
             <% end %>
           <% end %>
+
         <% end %>
+
       <% end %>
-      
     </div>
     <!------------------------------------------------------------------------>
   </div>
