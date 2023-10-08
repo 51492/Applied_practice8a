@@ -7,6 +7,7 @@ class MessagesController < ApplicationController
       # redirect_to "/rooms/#{@message.room_id}"
       @message = Message.new(message_params)
       @message.save
+      redirect_to "/rooms/#{@message.room_id}"
     else
       redirect_back(fallback_location: root_path)
     end

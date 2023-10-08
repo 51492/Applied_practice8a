@@ -11,8 +11,8 @@
     <% if @messages.present? %> <!--過去のメッセージが存在するかどうかを確認、あればtrue、無ければfalseが戻り値になる -->
       <% @messages.each do |m| %> <!--ハッシュとして格納された過去のメッセージ(要素)をeachで順に取り出し、引数mに格納-->
         <% current_user.id == m.user.id %><!--何がしたい？-->
-        <p><%= m.user.name %></p>
-        <p><%= m.message %></p>
+        <p><%= m.user.name %></p> <!--アソシエーションを組んだuserモデルからnameカラムに入っている要素を取り出す-->
+        <p><%= m.content %></p> <!--表示したいカラムはcontent-->
       <% end %>
     <% end %>
   </div>
