@@ -37,6 +37,27 @@ class BooksController < ApplicationController
     @user = @book.user
     @book_new = Book.new
     @post_comment = PostComment.new
+
+    #DM機能-----------------------------------------------------------------------------------
+      # @currentUserEntry = Entry.where(user_id: current_user.id)
+      # #whereメソッドでEntryモデル内でuser_idがcurrent_user.idと一致する複数レコードの中身を全て取り出しハッシュ要素にする
+      # @UserEntry = Entry.where(user_id: @user.id)
+      # #選択したuser_idと一致する複数レコードの中身を全て取り出しハッシュ要素にする
+      # unless @user.id == current_user.id #「選択したユーザーのidがカレントユーザーのidと一致しないとき」の条件を付与
+      #   @currentUserEntry.each do |cu| #@currentUserEntryの配列をcuに格納
+      #   @UserEntry.each do |u| #@UserEntryの配列をuに格納
+      #     if cu.room_id == u.room_id then #前文のeachで格納したcuのroom_idとuのroom_idを照らし合わせてイコールだったらという条件を付与
+      #       @is_room = true #「roomが存在する」というインスタンス変数を用意
+      #       @room_id = cu.room_id #対象のルームidをインスタンス変数に格納
+      #     end
+      #   end
+      #   end
+      # end
+      # unless @is_room #既存のroomがない場合という条件を付与(ある場合は前文でtrueが格納されている)
+      #   @room = Room.new #新しい空のRoomテーブルを用意して@roomのインスタンス変数に格納
+      #   @entry = Entry.new #新しい空のEntryテーブル(中間テーブル)を用意して@entryのインスタンス変数に格納
+      # end
+    #-----------------------------------------------------------------------------------------
   end
 
   def edit

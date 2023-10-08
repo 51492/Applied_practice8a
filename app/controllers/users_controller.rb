@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     @books = @user.books
     @book_new = Book.new
     @users_f = User.where.not(id: current_user.id)
-    
+
     #DM機能-----------------------------------------------------------------------------------
       @currentUserEntry = Entry.where(user_id: current_user.id)
       #whereメソッドでEntryモデル内でuser_idがcurrent_user.idと一致する複数レコードの中身を全て取り出しハッシュ要素にする
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
         @entry = Entry.new #新しい空のEntryテーブル(中間テーブル)を用意して@entryのインスタンス変数に格納
       end
     #-----------------------------------------------------------------------------------------
-      
+
   end
 
   def index
