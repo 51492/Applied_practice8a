@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
     if Entry.where(user_id: current_user.id, room_id: params[:message][:room_id]).present? #user_idがcurrent_user.idで、form_withで送られてきたmessageを含む全てのメッセージに対してmessageキーとroom_idキーが存在しますか？
       # @message = Message.create(params.require(:message).permit(:user_id, :content, :room_id).merge(user_id: current_user.id))
       # redirect_to "/rooms/#{@message.room_id}"
-      @message = Message.new(message_params)
+      @message = Message.new(message_params) 
       @message.save
       redirect_to "/rooms/#{@message.room_id}"
     else
